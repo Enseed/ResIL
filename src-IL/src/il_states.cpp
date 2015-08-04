@@ -573,7 +573,7 @@ ILAPI ILint ILAPIENTRY il2GetInteger(ILenum Mode)
 
 
 //! Sets the default origin to be used.
-ILboolean ILAPIENTRY ilOriginFunc(ILenum Mode)
+ILAPI ILboolean ILAPIENTRY ilOriginFunc(ILenum Mode)
 {
 	switch (Mode)
 	{
