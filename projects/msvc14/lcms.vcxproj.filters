@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="..\..\..\lcms2\src\lcms2_internal.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\lcms2\src\cmscam02.c" />
+    <ClCompile Include="..\..\..\lcms2\src\cmscgats.c" />
+    <ClCompile Include="..\..\..\lcms2\src\cmscnvrt.c" />
+    <ClCompile Include="..\..\..\lcms2\src\cmserr.c" />
+    <ClCompile Include="..\..\..\lcms2\src\cmsgamma.c" />
+    <ClCompile Include="..\..\..\lcms2\src\cmsgmt.c" />
+    <ClCompile Include="..\..\..\lcms2\src\cmshalf.c" />
+    <ClCompile Include="..\..\..\lcms2\src\cmsintrp.c" />
+    <ClCompile Include="..\..\..\lcms2\src\cmsio0.c" />
+    <ClCompile Include="..\..\..\lcms2\src\cmsio1.c" />
+    <ClCompile Include="..\..\..\lcms2\src\cmslut.c" />
+    <ClCompile Include="..\..\..\lcms2\src\cmsmd5.c" />
+    <ClCompile Include="..\..\..\lcms2\src\cmsmtrx.c" />
+    <ClCompile Include="..\..\..\lcms2\src\cmsnamed.c" />
+    <ClCompile Include="..\..\..\lcms2\src\cmsopt.c" />
+    <ClCompile Include="..\..\..\lcms2\src\cmspack.c" />
+    <ClCompile Include="..\..\..\lcms2\src\cmspcs.c" />
+    <ClCompile Include="..\..\..\lcms2\src\cmsplugin.c" />
+    <ClCompile Include="..\..\..\lcms2\src\cmsps2.c" />
+    <ClCompile Include="..\..\..\lcms2\src\cmssamp.c" />
+    <ClCompile Include="..\..\..\lcms2\src\cmssm.c" />
+    <ClCompile Include="..\..\..\lcms2\src\cmstypes.c" />
+    <ClCompile Include="..\..\..\lcms2\src\cmsvirt.c" />
+    <ClCompile Include="..\..\..\lcms2\src\cmswtpnt.c" />
+    <ClCompile Include="..\..\..\lcms2\src\cmsxform.c" />
+    <ClCompile Include="..\..\..\lcms2\src\cmsalpha.c" />
+  </ItemGroup>
+</Project>
