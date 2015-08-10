@@ -19,6 +19,7 @@
 //-----------------------------------------------------------------------------
 
 #include "il_internal.h"
+#include "IL/il.h"
 #ifndef IL_NO_WDP
 #include <WMPGlue.h>
 #include "il_wdp.h"
@@ -32,6 +33,11 @@
 		#endif
 	#endif
 #endif
+
+static __inline int IsEqualGUID(const GUID * rguid1, const GUID *rguid2)
+{
+	return IsEqualGUID(*rguid1, *rguid2);
+}
 
 //@TODO: Put in ilPKImageEncode_WritePixels_DevIL?
 ERR WriteDevILHeader(PKImageEncode* pIE)
@@ -162,15 +168,16 @@ Cleanup:*/
 
 Bool iEOSWS_File(struct WMPStream* pWS)
 {
-    //return feof(pWS->state.file.pFile);
-	return ieof();
+    return feof(pWS->state.file.pFile);
+	//return ieof();
 }
 
 ERR iReadWS_File(struct WMPStream* pWS, void* pv, size_t cb)
 {
 	// For some reason, the WDP images load just fine, but it tries to read too much,
 	//  so IL_FILE_READ_ERROR is set.  So we get rid of the error.
-	if (iread(pv, 1, (ILuint)cb) != cb)
+	//if (iread(pv, 1, (ILuint)cb) != cb)
+	if (fread(pv, 1, (ILuint)cb, pWS->state.file.pFile) != cb)
 		ilGetError();
     return WMP_errSuccess;
 }
@@ -180,8 +187,9 @@ ERR iWriteWS_File(struct WMPStream* pWS, const void* pv, size_t cb)
     ERR err = WMP_errSuccess;
 
     if (0 != cb) {
-		FailIf(1 != iwrite(pv, (ILuint)cb, 1), WMP_errFileIO);
-    }
+		FailIf(1 != fwrite(pv, (ILuint)cb, 1, pWS->state.file.pFile), WMP_errFileIO);
+//		FailIf(1 != iwrite(pv, (ILuint)cb, 1), WMP_errFileIO);
+	}
 
 Cleanup:
     return err;
@@ -191,8 +199,8 @@ ERR iSetPosWS_File(struct WMPStream* pWS, size_t offPos)
 {
     ERR err = WMP_errSuccess;
 
-    //FailIf(0 != fseek(pWS->state.file.pFile, (long)offPos, SEEK_SET), WMP_errFileIO);
-	FailIf(0 != iseek((ILuint)offPos, IL_SEEK_SET), WMP_errFileIO);
+    FailIf(0 != fseek(pWS->state.file.pFile, (long)offPos, SEEK_SET), WMP_errFileIO);
+	//FailIf(0 != iseek((ILuint)offPos, IL_SEEK_SET), WMP_errFileIO);
 
 Cleanup:
     return err;
@@ -203,9 +211,9 @@ ERR iGetPosWS_File(struct WMPStream* pWS, size_t* poffPos)
     ERR err = WMP_errSuccess;
     long lOff = 0;
 
-    //FailIf(-1 == (lOff = ftell(pWS->state.file.pFile)), WMP_errFileIO);
-	lOff = itell();
-    *poffPos = (size_t)lOff;
+    FailIf(-1 == (lOff = ftell(pWS->state.file.pFile)), WMP_errFileIO);
+	//lOff = itell();
+	*poffPos = (size_t)lOff;
 
 Cleanup:
     return err;
@@ -216,7 +224,7 @@ ERR ilCreateWS_File(struct WMPStream** ppWS, const char* szFilename, const char*
     ERR err = WMP_errSuccess;
     struct WMPStream* pWS = NULL;
 
-	*ppWS = icalloc(1, sizeof(**ppWS));
+	*ppWS = (WMPStream*)icalloc(1, sizeof(**ppWS));
 	if (*ppWS == NULL)
 		return WMP_errOutOfMemory;
     pWS = *ppWS;
@@ -245,7 +253,7 @@ ERR ilPKCodecFactory_CreateDecoderFromFile(PKImageDecode** ppDecoder)
     ERR err = WMP_errSuccess;
 
     char *pExt = ".wdp";  // We are loading a WDP file, so we have to tell the library that with this extension.
-    PKIID* pIID = NULL;
+    const PKIID* pIID = NULL;
 
     struct WMPStream* pStream = NULL;
     PKImageDecode* pDecoder = NULL;
@@ -257,7 +265,7 @@ ERR ilPKCodecFactory_CreateDecoderFromFile(PKImageDecode** ppDecoder)
     Call(ilCreateWS_File(&pStream, NULL, "rb"));
 
     // Create decoder
-    Call(PKCodecFactory_CreateCodec(pIID, ppDecoder));
+    Call(PKCodecFactory_CreateCodec(pIID, (void**)ppDecoder));
     pDecoder = *ppDecoder;
 
     // attach stream to decoder
@@ -274,7 +282,7 @@ ERR ilPKCreateFactory(PKFactory** ppFactory, U32 uVersion)
     ERR err = WMP_errSuccess;
     PKFactory* pFactory = NULL;
 
-    Call(PKAlloc(ppFactory, sizeof(**ppFactory)));
+    Call(PKAlloc((void**)ppFactory, sizeof(**ppFactory)));
     pFactory = *ppFactory;
 
     pFactory->CreateStream = PKCreateFactory_CreateStream;
@@ -328,7 +336,7 @@ ILboolean iLoadWdpInternal(/*ILconst_string FileName*/)
 	PI.pGUIDPixFmt = &guidPixFormat;
     PixelFormatLookup(&PI, LOOKUP_FORWARD);
 
-    pDecoder->WMP.wmiSCP.bfBitstreamFormat = 0;
+    pDecoder->WMP.wmiSCP.bfBitstreamFormat = SPATIAL;
     pDecoder->WMP.wmiSCP.uAlphaMode = 0;
     pDecoder->WMP.wmiSCP.sbSubband = SB_ALL;
     pDecoder->WMP.bIgnoreOverlap = FALSE;

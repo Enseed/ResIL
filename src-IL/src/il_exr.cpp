@@ -15,8 +15,8 @@
 #ifndef IL_NO_EXR
 
 #ifndef HAVE_CONFIG_H // We are probably on a Windows box .
-//#define OPENEXR_DLL
-#define HALF_EXPORTS
+#define OPENEXR_DLL
+//#define HALF_EXPORTS
 #endif //HAVE_CONFIG_H
 
 #include "il_exr.h"
