@@ -192,22 +192,22 @@
     <None Include="ResIL.def" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\..\..\HDPhoto\image\vc8projects\CommonLib.vcxproj">
+    <ProjectReference Include="..\..\..\HDPhoto\image\vc8projects\CommonLib.vcxproj">
       <Project>{6d4b7cf4-0921-4105-8456-70b8f1b0d7d5}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\..\..\..\HDPhoto\image\vc8projects\DecodeLib.vcxproj">
+    <ProjectReference Include="..\..\..\HDPhoto\image\vc8projects\DecodeLib.vcxproj">
       <Project>{f3ded308-7a6f-4b9f-8edf-af99dec8bde3}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\..\..\..\HDPhoto\image\vc8projects\EncodeLib.vcxproj">
+    <ProjectReference Include="..\..\..\HDPhoto\image\vc8projects\EncodeLib.vcxproj">
       <Project>{f99f7b19-47a6-4677-94f2-93c12cf1fb97}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\..\..\..\HDPhoto\image\vc8projects\MemtraceLib.vcxproj">
+    <ProjectReference Include="..\..\..\HDPhoto\image\vc8projects\MemtraceLib.vcxproj">
       <Project>{08e95f72-bfe8-4bfb-ab1d-065e6e9f02a7}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\..\..\..\HDPhoto\systems\tools\vc8projects\WMPGlueLib.vcxproj">
+    <ProjectReference Include="..\..\..\HDPhoto\systems\tools\vc8projects\WMPGlueLib.vcxproj">
       <Project>{ee985dd9-0b09-421a-913c-ddde5773ad52}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\..\..\..\HDPhoto\systems\tools\vc8projects\WMPMetaLib.vcxproj">
+    <ProjectReference Include="..\..\..\HDPhoto\systems\tools\vc8projects\WMPMetaLib.vcxproj">
       <Project>{f66b4867-b4b1-4efd-a7b0-4d0bd6935561}</Project>
     </ProjectReference>
     <ProjectReference Include="..\..\..\jasper\build\msvc\libjasper.vcxproj">
@@ -253,7 +253,7 @@
     <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Static|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v140</PlatformToolset>
@@ -278,9 +278,8 @@
     <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Static|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
@@ -292,7 +291,7 @@
     <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Static|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
@@ -446,7 +445,6 @@
       <ModuleDefinitionFile>ResIL.def</ModuleDefinitionFile>
       <Version>1.82</Version>
       <GenerateMapFile>true</GenerateMapFile>
-      <MapFileName>DevIL.map</MapFileName>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug Static|Win32'">
@@ -479,7 +477,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <Version>1.82</Version>
       <GenerateMapFile>true</GenerateMapFile>
-      <MapFileName>$(TargetDir)$(TargetName).map</MapFileName>
       <ImportLibrary>$(OutDir)$(TargetName).lib</ImportLibrary>
       <ModuleDefinitionFile>ResIL.def</ModuleDefinitionFile>
     </Link>
@@ -564,7 +561,6 @@
       </IgnoreSpecificDefaultLibraries>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <Version>1.82</Version>
-      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
       <GenerateMapFile>true</GenerateMapFile>
       <ImportLibrary>$(OutDir)$(TargetName).lib</ImportLibrary>
       <ModuleDefinitionFile>ResIL.def</ModuleDefinitionFile>
