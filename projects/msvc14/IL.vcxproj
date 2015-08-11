@@ -210,9 +210,6 @@
     <ProjectReference Include="..\..\..\HDPhoto\systems\tools\vc8projects\WMPMetaLib.vcxproj">
       <Project>{f66b4867-b4b1-4efd-a7b0-4d0bd6935561}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\jasper\build\msvc\libjasper.vcxproj">
-      <Project>{75df26a6-1f07-4653-84c5-f63f039297fa}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\lcms2\Projects\msvc\lcms2\lcms2-vc14.vcxproj">
       <Project>{8c51be48-adb8-4089-a9ec-f6bf993a0548}</Project>
     </ProjectReference>
@@ -225,9 +222,6 @@
     <ProjectReference Include="..\..\..\libpng\projects\vstudio\libpng\libpng-msvc14.vcxproj">
       <Project>{d6973076-9317-4ef2-a0b8-b7a18ac0713e}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\libtiff\build\msvc\TIFF-vc14.vcxproj">
-      <Project>{24995e07-f584-4865-b230-16eca2bba99e}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\openexr\IlmBase\build\msvc\IlmBase-vc14.vcxproj">
       <Project>{bf4da0bf-ac31-4ab7-a67c-cbb493732ee1}</Project>
     </ProjectReference>
@@ -236,6 +230,12 @@
     </ProjectReference>
     <ProjectReference Include="..\..\..\zlib\contrib\vstudio\vc14\zlib.vcxproj">
       <Project>{8fd826f8-3739-44e6-8cc8-997122e53b8d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjasper.vcxproj">
+      <Project>{75df26a6-1f07-4653-84c5-f63f039297fa}</Project>
+    </ProjectReference>
+    <ProjectReference Include="TIFF.vcxproj">
+      <Project>{24995e07-f584-4865-b230-16eca2bba99e}</Project>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Label="Globals">
